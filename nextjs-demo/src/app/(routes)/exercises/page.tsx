@@ -16,8 +16,8 @@ export default function ExercisesPage() {
                 }
                 const data = await response.json();
                 setExercises(data);
-            } catch (err) {
-                return (<h1>Cannot access exercises</h1>)
+            } catch (err: any) {
+                return (<h1>Cannot access exercises: {err}</h1>)
             } finally {
                 setLoading(false);
             }
