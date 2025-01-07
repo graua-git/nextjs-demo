@@ -76,8 +76,9 @@ export default function ExercisePage() {
                     notes: data?.notes || ''
                 });
                 console.log(formData);
-            } catch (err: any) {
-                return (<h1>An error occured: {err}</h1>)
+            } catch (err: unknown) {
+                console.log(err);
+                return (<h1>An error occured</h1>)
             } finally {
                 setLoading(false);
             }
@@ -85,7 +86,7 @@ export default function ExercisePage() {
 
         fetchExercises();
         console.log(notFound)
-    }, []);
+    }, [exerciseId, formData, notFound]);
 
     if (loading) {
         return (

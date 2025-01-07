@@ -35,8 +35,9 @@ export default function Home() {
                 }
                 const data = await response.json();
                 setExercises(data);
-            } catch (err: any) {
-                return (<h1>An error occured: {err}</h1>)
+            } catch (err: unknown) {
+                console.log(err);
+                return (<h1>An error occured</h1>)
             } finally {
                 setLoading(false);
             }

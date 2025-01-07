@@ -40,7 +40,6 @@ export async function GET(
     */
     // Get info from request
     let intId: number | undefined;
-
     try {
         const { id } = await params;
         intId = parseInt(id);
@@ -103,8 +102,14 @@ export async function PUT(
         500 Internal Server Error
     */
     // Get info from request
+    let intId: number | undefined;
     const entry = await request.json();
-    const { id } = await params;
+    try {
+        const { id } = await params;
+        intId = parseInt(id);
+    } catch (error) {
+        return Response.json({ "error": error }, { status: 500 });
+    }
 
     // Validate body
     const requiredAttributes = ['name', 'category', 'duration', 'date'];
@@ -117,11 +122,11 @@ export async function PUT(
     const exercises = JSON.parse(data);
 
     // Find index of current exercise, return error if not found
-    const index = exercises.findIndex((exercise: Exercise) => exercise.id === parseInt(id));
+    const index = exercises.findIndex((exercise: Exercise) => exercise.id === intId);
     if (exercises[index] === undefined) return Response.json({"error": "Not Found"}, { status: 404 });
     
     // Add id to entry udate exercises array
-    entry.id = parseInt(id);
+    entry.id = intId;
     exercises[index] = entry;
 
     // Write array back to database
@@ -158,14 +163,20 @@ export async function DELETE(
         500 Internal Server Error
     */
     // Get info from request
-    const { id } = await params;
+    let intId: number | undefined;
+    try {
+        const { id } = await params;
+        intId = parseInt(id);
+    } catch (error) {
+        return Response.json({ "error": error }, { status: 500 });
+    }
 
     // Get exercises from database
     const data = fs.readFileSync(filePath, 'utf-8');
     const exercises = JSON.parse(data);
 
     // Find index of current exercise, return error if not found
-    const index = exercises.findIndex((exercise: Exercise) => exercise.id === parseInt(id));
+    const index = exercises.findIndex((exercise: Exercise) => exercise.id === intId);
     if (exercises[index] === undefined) return Response.json({"error": "Not Found"}, { status: 404 });
 
     // Remove exercise from array
