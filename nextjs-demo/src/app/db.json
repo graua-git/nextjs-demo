@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Run",
+    "category": "cardio",
+    "duration": "15",
+    "date": "2024-12-30",
+    "notes": "Trail behind home",
+    "id": 1
+  },
+  {
+    "name": "Yoga",
+    "category": "Flexibility",
+    "duration": "60",
+    "date": "2024-12-31",
+    "notes": "Class at the gym",
+    "id": 2
+  },
+  {
+    "name": "Legs",
+    "category": "Strength",
+    "duration": "60",
+    "date": "2025-01-01",
+    "notes": "Squats, hamstring curls, calf raises, abductors, and adductors",
+    "id": 3
+  },
+  {
+    "name": "Climb",
+    "category": "Strength",
+    "duration": "120",
+    "date": "2025-01-02",
+    "notes": "Bouldering (max v5)",
+    "id": 4
+  },
+  {
+    "name": "Swim",
+    "category": "cardio",
+    "duration": "35",
+    "date": "2025-01-03",
+    "notes": "",
+    "id": 5
+  }
+]
