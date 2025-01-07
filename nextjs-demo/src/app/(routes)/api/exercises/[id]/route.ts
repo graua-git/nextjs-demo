@@ -5,7 +5,7 @@ import { NextRequest } from 'next/server';
 const filePath = path.join(process.cwd(), 'src/app/db.json');
 
 export async function GET(
-    request: NextRequest, { params }: { params: { id: string } }
+    request: NextRequest, { params }: { params: Promise<{ id: string }> }
 ) {
     /* 
     Retrieves an exercise with the given ID
@@ -60,7 +60,7 @@ export async function GET(
 }
 
 export async function PUT(
-    request: NextRequest, { params }: { params: { id: string } }
+    request: NextRequest, { params }: { params: Promise<{ id: string }> }
 ) {
     /* 
     Update an existing exercise with the given ID
@@ -137,7 +137,7 @@ export async function PUT(
 }
 
 export async function DELETE(
-    request: NextRequest, { params }: { params: { id: string } }
+    request: NextRequest, { params }: { params: Promise<{ id: string }> }
 ) {
     /* 
     Delete an exercise with the given ID
