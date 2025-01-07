@@ -15,7 +15,7 @@ Install dependencies
 npm install
 ```
 
-Runn development server
+Run development server
 ```{bash}
 npm run dev
 ```
