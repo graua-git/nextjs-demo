@@ -1,5 +1,5 @@
 # NextJS Demo
-###Full stack application demo for UpUnikSelf using Next.js and Tailwind CSS
+### Full stack application demo for UpUnikSelf using Next.js and Tailwind CSS
 ## Description
 This application helps you track your exercise routine. You can create, view, update, and delete exercises as needed.
 
