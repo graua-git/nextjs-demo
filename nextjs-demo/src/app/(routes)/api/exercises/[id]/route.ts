@@ -1,9 +1,12 @@
 import fs from "fs";
 import path from "path";
+import { NextRequest } from 'next/server';
 
 const filePath = path.join(process.cwd(), 'src/app/db.json');
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(
+    request: NextRequest, { params }: { params: { id: string } }
+) {
     /* 
     Retrieves an exercise with the given ID
 
@@ -36,21 +39,30 @@ export async function GET(request: Request, { params }: { params: { id: string }
         500 Internal Server Error
     */
     // Get info from request
-    const { id } = await params;
+    let intId: number | undefined;
 
+    try {
+        const { id } = await params;
+        intId = parseInt(id);
+    } catch (error) {
+        return Response.json({ "error": error }, { status: 500 });
+    }
+    
     // Get exercises from database
     const data = fs.readFileSync(filePath, 'utf-8');
     const exercises = JSON.parse(data);
 
     // Find exercise, return error if not found
-    const exercise = exercises.find((exercise: Exercise) => exercise.id === parseInt(id));
+    const exercise = exercises.find((exercise: Exercise) => exercise.id === intId);
     if (exercise === undefined) return Response.json({"error": "Not Found"}, { status: 404 });
 
     // Return response
     return Response.json(exercise);
 }
 
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
+export async function PUT(
+    request: NextRequest, { params }: { params: { id: string } }
+) {
     /* 
     Update an existing exercise with the given ID
 
@@ -119,7 +131,9 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     return Response.json(entry)
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(
+    request: NextRequest, { params }: { params: { id: string } }
+) {
     /* 
     Delete an exercise with the given ID
 
